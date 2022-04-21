@@ -2,10 +2,11 @@
 	<Shell id="shell">
 		<App id="app">
 			<pages>
-				<Page id="page" title="{i18n>Hello World t}">
+				<Page id="page" title="{i18n>Hello World 1dafdsfdsaf}">
 					<content></content>
 				</Page>
 			</pages>
 		</App>
 	</Shell>
 </mvc:View>
+
