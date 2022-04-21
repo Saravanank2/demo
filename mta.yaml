@@ -46,6 +46,10 @@ modules:
       - demomodule-content.zip
       name: demomodule
       target-path: resources/
+    - artifacts:
+      - demo1.zip
+      name: demo1
+      target-path: resources/
 - name: demomodule
   type: html5
   path: demomodule
@@ -54,12 +58,31 @@ modules:
     commands:
     - npm run build
     supported-platforms: []
+- name: demo1
+  type: html5
+  path: demo1
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: demo-destination-service
   type: org.cloudfoundry.managed-service
   parameters:
     config:
       HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
       version: 1.0.0
     service: destination
     service-name: demo-destination-service
@@ -77,6 +100,8 @@ resources:
     service: xsuaa
     service-name: demo-xsuaa-service
     service-plan: application
+parameters:
+  deploy_mode: html5-repo
 build-parameters:
   before-all:
   - builder: custom
